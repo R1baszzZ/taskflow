@@ -1,5 +1,6 @@
 import argparse
-import db
+import sqlite3
+from taskflow import db
 
 
 
@@ -10,13 +11,20 @@ def main():
 
     args = parser.parse_args()
     
+
     if args.command == "add-user":
-        user_id = db.add_user(args.name)
-        print(f"User '{args.name}' added with id {user_id}.")
-    
-    if not args.name:
-        print("Error: add-user requires a name")
-        return
+        if not args.name:
+            print("Error: add-user requires a name")
+            return
+        else:
+
+            try:
+                user_id = db.add_user(args.name)
+                print(f"User '{args.name}' added with id {user_id}.")
+            except sqlite3.IntegrityError:
+                print(f"User '{args.name}' already exists")
+
+
 
 
 
