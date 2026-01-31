@@ -22,7 +22,18 @@ def main():
                 user_id = db.add_user(args.name)
                 print(f"User '{args.name}' added with id {user_id}.")
             except sqlite3.IntegrityError:
-                print(f"User '{args.name}' already exists")
+                print(f"User '{args.name}' already exists")        
+    elif args.command == "list-users":
+        users = db.list_users()
+        if not users:
+            print("Your list is empty")
+            return
+        for user_id, name in users:
+            print(f"{user_id} | {name}")  
+    else:
+        print(f"Unknown command : '{args.command}'")
+
+    
 
 
 

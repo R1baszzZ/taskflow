@@ -24,3 +24,12 @@ def add_user(name: str) -> int:
         return cur.lastrowid
     finally:
         conn.close()
+
+def list_users() -> list[tuple[int, str]]:
+    conn = get_connection()
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT id, name FROM users ORDER BY id")
+        return cur.fetchall()
+    finally:
+        conn.close()
