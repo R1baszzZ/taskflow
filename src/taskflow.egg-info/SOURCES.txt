@@ -2,6 +2,7 @@ README.md
 pyproject.toml
 src/taskflow/__init__.py
 src/taskflow/__main__.py
+src/taskflow/db.py
 src/taskflow/init_db.py
 src/taskflow.egg-info/PKG-INFO
 src/taskflow.egg-info/SOURCES.txt

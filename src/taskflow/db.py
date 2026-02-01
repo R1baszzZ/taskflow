@@ -43,3 +43,27 @@ def delete_user(user_id: int) -> bool:
         return cur.rowcount > 0
     finally:
         conn.close()
+
+def add_task(title: str, description: str | None, assignee_id: int | None):
+    title = title.strip()
+    if not title:
+        raise ValueError("title cannot be empty")
+    
+    if description is not None:
+        description = description.strip()
+        if description == "":
+            description = None
+
+    conn = get_connection()
+    try:
+        cur = conn.cursor()
+        sql = """    
+        INSERT INTO tasks (title, description, assignee_id)
+        VALUES (?, ?, (SELECT id FROM users WHERE id = ?))
+        """
+        cur.execute(sql, (title, description, assignee_id))         
+
+        conn.commit()
+        return cur.lastrowid
+    finally:
+        conn.close()    
