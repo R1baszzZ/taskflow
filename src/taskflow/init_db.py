@@ -1,6 +1,7 @@
 import sqlite3
 from pathlib import Path
 
+# creates the sqlite database and tables
 def main():
     # in here im using the path library to create a directory called data
     DATA_DIR = Path("data")
@@ -21,8 +22,8 @@ def main():
         );
     """
     # commiting the connection
-    cursor = conn.cursor()
-    cursor.execute(CREATE_USERS_TABLE_SQL)
+    cur = conn.cursor()
+    cur.execute(CREATE_USERS_TABLE_SQL)
 
     # tasks table
     CREATE_TASKS_TABLE_SQL = """
@@ -37,13 +38,15 @@ def main():
         );
     """
     # commiting the connection
-    cursor.execute(CREATE_TASKS_TABLE_SQL)
+    cur.execute(CREATE_TASKS_TABLE_SQL)
     conn.commit()
 
     conn.close()
 
+    # quick success message
     print(f"DB initialized at: {DB_PATH}")
 
+# only run when executed directly
 if __name__ == "__main__":
     main()
     
