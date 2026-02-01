@@ -33,3 +33,13 @@ def list_users() -> list[tuple[int, str]]:
         return cur.fetchall()
     finally:
         conn.close()
+
+def delete_user(user_id: int) -> bool:
+    conn = get_connection()
+    try:
+        cur = conn.cursor()
+        cur.execute("DELETE FROM users WHERE id = ?", (user_id,))
+        conn.commit()
+        return cur.rowcount > 0
+    finally:
+        conn.close()
