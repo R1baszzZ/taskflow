@@ -34,11 +34,11 @@ def main():
     # command delete user
     elif args.command == "delete-user":
         
+        user_id = int(args.value)
         if not user_id:
             print("Error: delete-user requires a user id")
             return
         try:
-            user_id = int(args.value)
             if user_id < 1:
                 print("Error: user id must be a positive number")
                 return
@@ -55,8 +55,13 @@ def main():
         
         deleted = db.delete_user(user_id)
         if deleted:
-            print(f"User {user_name} with id of {user_id} was successfully deleted.")
-    
+            if user_name:
+                print(f"User '{user_name}' (id {user_id}) was successfully deleted.")
+            else:
+                print(f"User with id {user_id} was successfully deleted.")
+        else:
+            print(f"No user found with id {user_id}.")
+            
     
     else:
         print(f"Unknown command : '{args.command}'")
