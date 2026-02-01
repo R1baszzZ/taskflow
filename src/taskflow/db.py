@@ -158,3 +158,18 @@ def list_tasks(
         return cur.fetchall()
     finally:
         conn.close()
+
+# list tasks with ids for UI selection
+def list_tasks_with_ids() -> list[tuple[int, str, str, str | None]]:
+    conn = get_connection()
+    try:
+        cur = conn.cursor()
+        sql = """
+            SELECT tasks.id, tasks.title, tasks.status, users.name
+            FROM tasks LEFT JOIN users ON tasks.assignee_id = users.id
+            ORDER BY tasks.created_at, tasks.id
+        """
+        cur.execute(sql)
+        return cur.fetchall()
+    finally:
+        conn.close()
