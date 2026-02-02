@@ -2,9 +2,15 @@
 __pycache__/
 *.pyc
 .venv/
+src/taskflow.egg-info/
 
 # SQLite
 data/*.db
+
+# PyInstaller
+build/
+dist/
+*.spec
 
 # OS
 .DS_Store
