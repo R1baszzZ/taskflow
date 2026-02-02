@@ -33,25 +33,7 @@ The goal is not to be feature-complete, but **solid, readable, and extendable**.
 - **SQLite** (local database)
 - **Tkinter + ttk** (GUI)
 - **PyInstaller** (packaged as an executable)
-
----
-
-## Project Structure
-taskflow/
-├── src/taskflow/
-│ ├── main.py # GUI entry point
-│ ├── db.py # Database logic
-│ ├── init_db.py # Database initialization
-│ └── init.py
-├── data/
-│ └── taskflow.db # SQLite database
-├── README.md
-└── pyproject.toml
-Each part of the project has a single responsibility:
-- UI code handles **user interaction**
-- Database code handles **data**
-- No SQL inside UI logic
-
+  
 ---
 
 ## Design Decisions (On Purpose)
@@ -96,4 +78,5 @@ Download and run the `.exe` (no Python required).
 ### Option 2: From Source
 ```bash
 pip install -e .
+
 python -m taskflow
